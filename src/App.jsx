@@ -15,6 +15,8 @@ import PiMemorization from "./components/PiMemorization";
 import VisualDemonstrations from "./components/VisualDemonstrations";
 import NotFound from "./components/NotFound";
 import GoogleSignIn from "./components/GoogleSignIn";
+import History from "./components/History";
+import Contribute from "./components/Contribute";
 import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { MarksProvider } from "./context/MarksContext";
@@ -60,6 +62,16 @@ function App() {
             <Route path="/about" element={
               <ProtectedRoute>
                 <About />
+              </ProtectedRoute>
+            } />
+            <Route path="/history" element={
+              <ProtectedRoute>
+                <History />
+              </ProtectedRoute>
+            } />
+            <Route path="/contribute" element={
+              <ProtectedRoute>
+                <Contribute />
               </ProtectedRoute>
             } />
             <Route path="/services" element={
