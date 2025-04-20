@@ -27,10 +27,10 @@ function Header({ user }) {
 
   const navItems = [
     { name: "Home", path: "/" },
+    { name: "History of Pi", path: "/history" },
+    { name: "Learning Tools", path: "/projects" },
+    { name: "Contribute", path: "/contribute" },
     { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Projects", path: "/projects" },
-    { name: "Contact", path: "/contact" },
   ];
 
   const handleLogout = async () => {
@@ -126,7 +126,7 @@ function Header({ user }) {
                           className="block px-4 py-2 hover:bg-gray-100 transition"
                           onClick={() => setIsDropdownOpen(false)}
                         >
-                          Dashboard
+                          My Learning Progress
                         </NavLink>
                       </li>
                       <li>
@@ -186,7 +186,7 @@ function Header({ user }) {
                           className="block px-4 py-2 hover:bg-gray-100 transition"
                           onClick={() => setIsDropdownOpen(false)}
                         >
-                          Dashboard
+                          My Learning Progress
                         </NavLink>
                       </li>
                       <li>
