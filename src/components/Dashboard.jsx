@@ -7,7 +7,7 @@ function Dashboard() {
   const user = auth.currentUser;
 
   return (
-    <div className="container mx-auto p-4 bg-slate-900 min-h-screen">
+    <div className="container mx-auto p-4  bg-slate-900 min-h-screen">
       <h1 className="text-4xl font-bold text-center text-white mb-8">
         Dashboard
       </h1>
@@ -41,7 +41,7 @@ function Dashboard() {
                 {marks.map((mark, index) => (
                   <tr
                     key={index}
-                    className="border-b hover:bg-gray-100 transition duration-300"
+                    className="border-b text-gray-900 dark:text-gray-900 hover:bg-gray-100 transition duration-300"
                   >
                     <td className="py-3 px-6">{mark.game}</td>
                     <td className="py-3 px-6">{mark.score}</td>

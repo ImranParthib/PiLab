@@ -44,7 +44,7 @@ const Home = () => {
               <p className="mt-4">For over 4,000 years, mathematicians have been fascinated by this mysterious constant that appears throughout mathematics and physics.</p>
             </div>
           </div>
-          
+
           <div className="flex justify-center mb-8">
             <div className="text-center text-5xl sm:text-6xl md:text-7xl font-mono font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 tracking-wider">
               3.14159265358979323846...

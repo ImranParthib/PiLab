@@ -77,10 +77,9 @@ function Header({ user }) {
                       text-xs sm:text-sm uppercase tracking-wider font-medium
                       text-white hover:text-purple-300 dark:hover:text-purple-400 
                       transition duration-300 ease-in-out
-                      ${
-                        isActive
-                          ? "border-b-2 border-purple-300 dark:border-purple-400"
-                          : ""
+                      ${isActive
+                        ? "border-b-2 border-purple-300 dark:border-purple-400"
+                        : ""
                       }
                     `}
                   >
@@ -229,10 +228,9 @@ function Header({ user }) {
                       duration-300 ease-in-out py-2 
                       text-sm uppercase tracking-wider 
                       font-medium text-center
-                      ${
-                        isActive
-                          ? "border-b-2 border-purple-300 dark:border-purple-400"
-                          : ""
+                      ${isActive
+                        ? "border-b-2 border-purple-300 dark:border-purple-400"
+                        : ""
                       }
                     `}
                     onClick={toggleMenu}
