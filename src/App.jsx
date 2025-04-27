@@ -113,8 +113,8 @@ function App() {
           </Routes>
           <BackToTopButton />
         </main>
+        <Footer />
       </div>
-      <Footer />
     </MarksProvider>
   );
 }
