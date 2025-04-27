@@ -1,28 +1,27 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./components/Home";
-import About from "./components/About";
-import Services from "./components/Services";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-
-import Dashboard from "./components/Dashboard";
-import BackToTopButton from "./components/BackToTopButton";
-import PiCalculator from "./components/PiCalculator";
-import PiMemorization from "./components/PiMemorization";
-import VisualDemonstrations from "./components/VisualDemonstrations";
-import NotFound from "./components/NotFound";
-import GoogleSignIn from "./components/GoogleSignIn";
-import History from "./components/History";
-import Contribute from "./components/Contribute";
-import Quiz from "./components/Quiz"; // Import Quiz component
+import Header from "./components/Header.jsx";
+import Home from "./components/Home.jsx";
+import About from "./components/About.jsx";
+import Services from "./components/Services.jsx";
+import Projects from "./components/Projects.jsx";
+import Contact from "./components/Contact.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import BackToTopButton from "./components/BackToTopButton.jsx";
+import PiCalculator from "./components/PiCalculator.jsx";
+import PiMemorization from "./components/PiMemorization.jsx";
+import VisualDemonstrations from "./components/VisualDemonstrations.jsx";
+import NotFound from "./components/NotFound.jsx";
+import GoogleSignIn from "./components/GoogleSignIn.jsx";
+import History from "./components/History.jsx";
+import Contribute from "./components/Contribute.jsx";
+import Quiz from "./components/Quiz.jsx"; // Import Quiz component
 import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
-import { MarksProvider } from "./context/MarksContext";
+import { MarksProvider } from "./context/MarksContext.jsx";
 import PropTypes from "prop-types";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
