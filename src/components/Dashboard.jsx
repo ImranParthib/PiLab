@@ -12,7 +12,7 @@ function Dashboard() {
   const getTotalScore = () => {
     return marks.reduce((total, mark) => total + mark.score, 0);
   };
-  
+
   const getAchievementLevel = (score) => {
     if (score >= 1000) return "Master";
     if (score >= 500) return "Expert";
@@ -20,7 +20,7 @@ function Dashboard() {
     if (score >= 100) return "Intermediate";
     return "Beginner";
   };
-  
+
   const getNextLevel = (score) => {
     if (score < 100) return { name: "Intermediate", required: 100, remaining: 100 - score };
     if (score < 200) return { name: "Advanced", required: 200, remaining: 200 - score };
@@ -53,11 +53,47 @@ function Dashboard() {
   // Sort marks by score (descending)
   const sortedMarks = [...marks].sort((a, b) => b.score - a.score);
 
-  // Prepare data for charts
+  // Prepare data for charts with label color modifications
   const pieChartData = marks.map(mark => ({
     name: mark.game,
-    value: mark.score
+    value: mark.score,
+    fill: "#8884d8" // Add default fill color
   }));
+
+  // Custom label renderer for pie chart to ensure text visibility
+  const renderCustomizedLabel = (props) => {
+    const { cx, cy, midAngle, outerRadius, fill, payload, index } = props;
+    const RADIAN = Math.PI / 180;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const mx = cx + (outerRadius + 30) * cos;
+    const my = cy + (outerRadius + 30) * sin;
+    const textAnchor = cos >= 0 ? 'start' : 'end';
+
+    return (
+      <g>
+        <text
+          x={mx}
+          y={my}
+          textAnchor={textAnchor}
+          fill="#4B5563" // Use a color that works in both light and dark modes
+          className="text-sm font-medium"
+          style={{ fontWeight: 500 }}
+        >
+          {payload.name}
+        </text>
+        <text
+          x={mx}
+          y={my + 15}
+          textAnchor={textAnchor}
+          fill="#6B7280"
+          className="text-xs"
+        >
+          {`${payload.value} points`}
+        </text>
+      </g>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-900 py-12 px-4">
@@ -93,8 +129,8 @@ function Dashboard() {
                       <span>{nextLevel.name}</span>
                     </div>
                     <div className="w-full bg-indigo-900/30 rounded-full h-3">
-                      <div 
-                        className="h-3 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500" 
+                      <div
+                        className="h-3 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500"
                         style={{ width: `${progressPercent}%` }}
                       ></div>
                     </div>
@@ -103,7 +139,7 @@ function Dashboard() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="p-8 md:w-3/5">
                   <div className="flex space-x-6 mb-8">
                     <div className="text-center">
@@ -121,36 +157,33 @@ function Dashboard() {
                       <div className="text-gray-600 dark:text-gray-400 text-sm">Avg Points</div>
                     </div>
                   </div>
-                  
+
                   {/* Tab Navigation */}
                   <div className="flex border-b border-gray-200 dark:border-gray-700">
                     <button
                       onClick={() => setActiveTab("overview")}
-                      className={`py-3 px-4 text-sm font-medium ${
-                        activeTab === "overview" 
-                          ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                          : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
-                      }`}
+                      className={`py-3 px-4 text-sm font-medium ${activeTab === "overview"
+                        ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                        : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
+                        }`}
                     >
                       Overview
                     </button>
                     <button
                       onClick={() => setActiveTab("activities")}
-                      className={`py-3 px-4 text-sm font-medium ${
-                        activeTab === "activities" 
-                          ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                          : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
-                      }`}
+                      className={`py-3 px-4 text-sm font-medium ${activeTab === "activities"
+                        ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                        : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
+                        }`}
                     >
                       Activities
                     </button>
                     <button
                       onClick={() => setActiveTab("analytics")}
-                      className={`py-3 px-4 text-sm font-medium ${
-                        activeTab === "analytics" 
-                          ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
-                          : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
-                      }`}
+                      className={`py-3 px-4 text-sm font-medium ${activeTab === "analytics"
+                        ? "border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400"
+                        : "text-gray-500 hover:text-indigo-600 dark:hover:text-indigo-400"
+                        }`}
                     >
                       Analytics
                     </button>
@@ -216,11 +249,12 @@ function Dashboard() {
                                 outerRadius={80}
                                 paddingAngle={5}
                                 dataKey="value"
+                                labelLine={true}
+                                label={renderCustomizedLabel}
                               >
                                 {pieChartData.map((entry, index) => (
                                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
-                                <LabelList dataKey="name" position="outside" />
                               </Pie>
                               <Tooltip />
                             </PieChart>
@@ -231,11 +265,11 @@ function Dashboard() {
                   )}
                 </div>
               )}
-              
+
               {activeTab === "activities" && (
                 <div>
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">Your Activities</h3>
-                  
+
                   {marks.length === 0 ? (
                     <div className="text-center py-12">
                       <p className="text-gray-600 dark:text-gray-400">No activities recorded yet.</p>
@@ -283,11 +317,11 @@ function Dashboard() {
                   )}
                 </div>
               )}
-              
+
               {activeTab === "analytics" && (
                 <div>
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-6">Analytics & Insights</h3>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Achievement Card */}
                     <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 p-6 rounded-xl border border-indigo-100 dark:border-indigo-800/30">
@@ -300,7 +334,7 @@ function Dashboard() {
                           <Award className="h-6 w-6 text-yellow-500" />
                         </div>
                       </div>
-                      
+
                       <div className="mt-6">
                         <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
                           {achievementLevel}
@@ -311,20 +345,20 @@ function Dashboard() {
                             <span>{Math.round(progressPercent)}%</span>
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div 
-                              className="h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" 
+                            <div
+                              className="h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500"
                               style={{ width: `${progressPercent}%` }}
                             ></div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Recommendations Card */}
                     <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 p-6 rounded-xl border border-blue-100 dark:border-blue-800/30">
                       <h4 className="text-lg font-medium text-gray-800 dark:text-white">Recommended Next Steps</h4>
                       <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">Activities to help you advance</p>
-                      
+
                       <div className="space-y-3">
                         <a href="/pi-calculator" className="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow transition-shadow">
                           <Calculator className="h-5 w-5 text-blue-500 mr-3" />
@@ -333,7 +367,7 @@ function Dashboard() {
                             <div className="text-xs text-gray-500 dark:text-gray-400">Calculate Pi using different algorithms</div>
                           </div>
                         </a>
-                        
+
                         <a href="/pi-memorization" className="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow transition-shadow">
                           <BookOpen className="h-5 w-5 text-green-500 mr-3" />
                           <div>
@@ -341,7 +375,7 @@ function Dashboard() {
                             <div className="text-xs text-gray-500 dark:text-gray-400">Challenge yourself to memorize Pi digits</div>
                           </div>
                         </a>
-                        
+
                         <a href="/quiz" className="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg hover:shadow transition-shadow">
                           <Brain className="h-5 w-5 text-purple-500 mr-3" />
                           <div>
