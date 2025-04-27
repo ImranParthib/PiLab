@@ -17,6 +17,7 @@ import NotFound from "./components/NotFound";
 import GoogleSignIn from "./components/GoogleSignIn";
 import History from "./components/History";
 import Contribute from "./components/Contribute";
+import Quiz from "./components/Quiz"; // Import Quiz component
 import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { MarksProvider } from "./context/MarksContext";
@@ -97,6 +98,11 @@ function App() {
             <Route path="/pi-memorization" element={
               <ProtectedRoute>
                 <PiMemorization />
+              </ProtectedRoute>
+            } />
+            <Route path="/quiz" element={
+              <ProtectedRoute>
+                <Quiz />
               </ProtectedRoute>
             } />
             <Route path="/dashboard" element={

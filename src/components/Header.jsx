@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Menu, X, Sun, Moon, Loader } from "lucide-react";
+import { Menu, X, Sun, Moon, Loader, Brain } from "lucide-react";
 import { auth } from "../../Firebase/firebaseConfig";
 import PropTypes from "prop-types";
 
@@ -29,6 +29,7 @@ function Header({ user }) {
     { name: "Home", path: "/" },
     { name: "History of Pi", path: "/history" },
     { name: "Learning Tools", path: "/projects" },
+    { name: "Quiz", path: "/quiz" },
     { name: "Contribute", path: "/contribute" },
     { name: "About", path: "/about" },
   ];
@@ -51,7 +52,7 @@ function Header({ user }) {
   };
 
   return (
-    <header className="bg-gradient-to-r from-purple-800 to-indigo-900 dark:from-gray-800 dark:to-gray-900 text-white py-3 px-2 sm:px-4 shadow-lg">
+    <header className="bg-gradient-to-r from-purple-800 to-indigo-900 dark:from-gray-800 dark:to-gray-900 text-white py-3 px-2 sm:px-4 shadow-lg sticky top-0 z-50">
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-between items-center">
           <NavLink to="/" className="flex items-center space-x-2">
@@ -76,13 +77,16 @@ function Header({ user }) {
                     className={({ isActive }) => `
                       text-xs sm:text-sm uppercase tracking-wider font-medium
                       text-white hover:text-purple-300 dark:hover:text-purple-400 
-                      transition duration-300 ease-in-out
+                      transition duration-300 ease-in-out flex items-center
                       ${isActive
                         ? "border-b-2 border-purple-300 dark:border-purple-400"
                         : ""
                       }
                     `}
                   >
+                    {item.name === "Quiz" && (
+                      <Brain className="mr-1 h-3 w-3 sm:h-4 sm:w-4" />
+                    )}
                     {item.name}
                   </NavLink>
                 </li>
@@ -227,7 +231,7 @@ function Header({ user }) {
                       dark:hover:text-purple-400 transition 
                       duration-300 ease-in-out py-2 
                       text-sm uppercase tracking-wider 
-                      font-medium text-center
+                      font-medium text-center flex justify-center items-center
                       ${isActive
                         ? "border-b-2 border-purple-300 dark:border-purple-400"
                         : ""
@@ -235,6 +239,9 @@ function Header({ user }) {
                     `}
                     onClick={toggleMenu}
                   >
+                    {item.name === "Quiz" && (
+                      <Brain className="mr-1 h-4 w-4" />
+                    )}
                     {item.name}
                   </NavLink>
                 </li>
