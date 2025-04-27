@@ -22,6 +22,7 @@ import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { MarksProvider } from "./context/MarksContext";
 import PropTypes from "prop-types";
+import Footer from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -119,7 +120,7 @@ function App() {
           </Routes>
           <BackToTopButton />
         </main>
-
+        <Footer />
       </div>
     </MarksProvider>
   );
