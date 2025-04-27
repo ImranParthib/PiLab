@@ -7,7 +7,7 @@ import About from "./components/About";
 import Services from "./components/Services";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+
 import Dashboard from "./components/Dashboard";
 import BackToTopButton from "./components/BackToTopButton";
 import PiCalculator from "./components/PiCalculator";
@@ -119,7 +119,7 @@ function App() {
           </Routes>
           <BackToTopButton />
         </main>
-        <Footer />
+
       </div>
     </MarksProvider>
   );
