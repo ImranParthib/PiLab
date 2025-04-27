@@ -9,7 +9,7 @@ import {
   MapPin,
 } from "lucide-react";
 
-function Footer() {
+function FooterComponent() {
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black dark:from-gray-800 dark:to-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,4 +118,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default FooterComponent;
