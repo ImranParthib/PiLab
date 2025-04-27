@@ -21,7 +21,7 @@ import { auth } from "../Firebase/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { MarksProvider } from "./context/MarksContext.jsx";
 import PropTypes from "prop-types";
-import Footer from "./components/Footer.jsx";
+import Footer from "/src/components/Footer.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
